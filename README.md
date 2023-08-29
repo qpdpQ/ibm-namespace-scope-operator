@@ -80,6 +80,26 @@ The following is an example of what is added and overridden in all `ClusterServi
     ...
     ```
 
+  - The **csvInjector** (default is false / disabled) also modifies any `WebhookConfiguration` that defind inside `ClusterServiceVersion` in the current namespace with the `nss.operator.ibm.com/managed-webhooks` annotation to consume the `NamespaceSelector` of this webhook
+
+      ```
+    ...
+    # This annotation must be added to the CSV for injection to occur.  
+    metadata:
+      annotations:
+        nss.operator.ibm.com/managed-webhooks: ''
+    ...
+    # This is patched namespaceSelector
+    namespaceSelector:
+      matchExpressions:
+        - key: kubernetes.io/metedata.name
+          operator: In
+          values:
+          - cloudpak-a-ns
+          - cloudpak-b-ns
+    ...
+    ```
+
 ## How does it work
 
 Namespace Scope Operator runs in `ibm-common-services` namespace with namespace admin permission.
