@@ -7,6 +7,7 @@ metadata:
     app.kubernetes.io/managed-by: ibm-namespace-scope-operator
     app.kubernetes.io/name: ibm-namespace-scope-operator
     productName: IBM_Cloud_Platform_Common_Services
+    component-id: {{ .Chart.Name }}
 spec:
   replicas: 1
   selector:
@@ -49,7 +50,7 @@ spec:
           ]
         capabilities: Seamless Upgrades
         productName: IBM Cloud Platform Common Services
-        containerImage: '{{ .Values.imagePullPrefix }}/{{ .Values.imageRegistryNamespaceOperator }}/ibm-namespace-scope-operator:{{ .Values.imageTag }}'
+        containerImage: '{{ .Values.imagePullPrefix }}/{{ .Values.cpfs.imageRegistryNamespaceOperator }}/ibm-namespace-scope-operator:{{ .Values.imageTag }}'
         productMetric: FREE
     spec:
       restartPolicy: Always
@@ -103,7 +104,7 @@ spec:
               type: RuntimeDefault
           imagePullPolicy: IfNotPresent
           terminationMessagePolicy: File
-          image: '{{ .Values.imagePullPrefix }}/{{ .Values.imageRegistryNamespaceOperator }}/{{ .Values.operatorImage }}:{{ .Values.operatorVersion }}'
+          image: '{{ .Values.imagePullPrefix }}/{{ .Values.cpfs.imageRegistryNamespaceOperator }}/{{ .Values.operatorImage }}:{{ .Values.operatorVersion }}'
       serviceAccount: ibm-namespace-scope-operator
       dnsPolicy: ClusterFirst
   strategy:
