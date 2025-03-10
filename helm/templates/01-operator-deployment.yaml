@@ -51,7 +51,7 @@ spec:
           ]
         capabilities: Seamless Upgrades
         productName: IBM Cloud Platform Common Services
-        containerImage: {{ .Values.global.imagePullPrefix }}/{{ .Values.cpfs.imageRegistryNamespaceOperator }}/ibm-namespace-scope-operator:4.2.12
+        containerImage: {{ .Values.global.imagePullPrefix }}/{{ .Values.cpfs.imageRegistryNamespaceOperator }}/ibm-namespace-scope-operator:4.2.14
         productMetric: FREE
     spec:
       restartPolicy: Always
@@ -105,7 +105,7 @@ spec:
               type: RuntimeDefault
           imagePullPolicy: IfNotPresent
           terminationMessagePolicy: File
-          image: {{ .Values.global.imagePullPrefix }}/{{ .Values.cpfs.imageRegistryNamespaceOperator }}/ibm-namespace-scope-operator:4.2.12
+          image: {{ .Values.global.imagePullPrefix }}/{{ .Values.cpfs.imageRegistryNamespaceOperator }}/ibm-namespace-scope-operator:4.2.14
       serviceAccount: ibm-namespace-scope-operator
       dnsPolicy: ClusterFirst
   strategy:
