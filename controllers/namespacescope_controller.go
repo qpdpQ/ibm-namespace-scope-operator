@@ -138,6 +138,11 @@ func (r *NamespaceScopeReconciler) Reconcile(ctx context.Context, req ctrl.Reque
 		return ctrl.Result{}, err
 	}
 
+	if err := r.UpdateConfigMap(ctx, instance); err != nil {
+		klog.Errorf("Failed to update configmap: %v", err)
+		return ctrl.Result{}, err
+	}
+
 	if err := r.PushRbacToNamespace(ctx, instance); err != nil {
 		klog.Errorf("Failed to generate rbac: %v", err)
 		return ctrl.Result{}, err
@@ -145,11 +150,6 @@ func (r *NamespaceScopeReconciler) Reconcile(ctx context.Context, req ctrl.Reque
 
 	if err := r.DeleteRbacFromUnmanagedNamespace(ctx, instance); err != nil {
 		klog.Errorf("Failed to delete rbac: %v", err)
-		return ctrl.Result{}, err
-	}
-
-	if err := r.UpdateConfigMap(ctx, instance); err != nil {
-		klog.Errorf("Failed to update configmap: %v", err)
 		return ctrl.Result{}, err
 	}
 
